@@ -1,10 +1,26 @@
 import mysql.connector as sql
-from flask import Flask, render_template,request,url_for
-conn = sql.connect(host = "localhost", user = "root" ,passwd = "HPSroot123*", database = "NIE")
+import random
+from flask import Flask, render_template,request,url_for, redirect
+conn = sql.connect(host = "localhost", user = "root" ,password = "Pavitra@01", database = "real_estate")
 app = Flask(__name__)
 
-c = conn.cursor()
 
+def id_generator():
+    c.execute("select id from user_access")
+    row1 = c.fetchall()
+    c.execute("select id from seller_access")
+    row2 = c.fetchall()
+    temp = []
+    for i in row1:
+        temp.append(i[0])
+    for i in row2:
+        temp.append(i[0])
+    while True:
+        new_id = random.randint(1000, 9999)
+        if new_id not in temp:
+            return new_id
+
+c = conn.cursor()
 if conn.is_connected():
     print("Connected")
 else:
@@ -21,13 +37,38 @@ def dashboard():
     password = request.form["pass"]
     if not uname or not password:
         return "INCOMPLETE CREDENTIALS"
-    c.execute("Select pass from access where name = %s",(uname,))
-    row = c.fetchone()
-    if (row[0]==int(password)):
-        return render_template('dashboard.html')
+    c.execute("Select pass from user_access where id = '{}'".format(uname))
+    row1 = c.fetchone()
+    c.execute("Select pass from seller_access where id = '{}'".format(uname))
+    row2 = c.fetchone()
+    if row1:
+        if (row1[0]==int(password)):
+            return render_template('dashboard.html')
+        else:
+            return "Invalid Credentails"
+    elif row2:
+        if(row2[0]==int(password)):
+            return render_template('dashboard.html')
+        else:
+            return "Invalid Credentails"
     else:
-        return "Invalid Credentails"
+        return "Not registered under seller or Buyer"
     
+
+@app.route('/Register', methods = ["POST","GET"])
+def register():
+    return render_template('register.html')
+
+@app.route('/Register2',methods = ["POST", "GET"])
+def register2():
+    uname = request.form["name"]
+    password = request.form["pass"]
+    phone = request.form["phone"]
+    access = request.form["access"]
+    id = id_generator()
+    c.execute("insert into {} values('{}','{}','{}','{}')".format(access, id, password, uname, phone))
+    conn.commit()
+    return redirect(url_for('login'))
 
 @app.route('/sellProp', methods = ["POST","GET"])
 def sellProp():
