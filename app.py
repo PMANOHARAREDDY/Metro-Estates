@@ -1,7 +1,7 @@
 import mysql.connector as sql
 import random
 from flask import Flask, render_template,request,url_for, redirect
-conn = sql.connect(host = "localhost", user = "root" ,password = "Pavitra@01", database = "real_estate")
+conn = sql.connect(host = "localhost", user = "root" ,passwd = "HPSroot123*", database = "nie")
 app = Flask(__name__)
 
 
@@ -41,14 +41,14 @@ def dashboard():
     row1 = c.fetchone()
     c.execute("Select pass from seller_access where id = '{}'".format(uname))
     row2 = c.fetchone()
-    if row1:
+    if row1 != None:
         if (row1[0]==int(password)):
-            return render_template('dashboard.html')
+            return render_template('buyer_dashboard.html')
         else:
             return "Invalid Credentails"
-    elif row2:
+    elif row2 != None:
         if(row2[0]==int(password)):
-            return render_template('dashboard.html')
+            return render_template('seller_dashboard.html')
         else:
             return "Invalid Credentails"
     else:
@@ -77,6 +77,13 @@ def sellProp():
 @app.route("/leaseProp", methods=["POST","GET"])
 def leaseProp():
     return render_template("Lease_Property.html")
+@app.route('/buyProp', methods = ["POST","GET"])
+def buyProp():
+    return render_template("Buy_Property.html")
+
+@app.route("/buyLeaseProp", methods=["POST","GET"])
+def buyLeaseProp():
+    return render_template("Buy_Lease_Property.html")
 
 @app.route('/createAcc',methods=['POST','GET'])
 def createAcc():
