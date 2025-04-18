@@ -10,15 +10,21 @@
 <body>
     <h1>Welcome to Metro-Estates</h1>
     
-    <p style="margin:0;">New user?</p>
-    <p style="margin:0;"><a href="{{url_for('createAcc')}}">Create Account</a></p>
-
+    <form method="POST" action="/Register">
+        <table>
+            <tr>
+                <td>New User ??</td>
+                
+                <td><input type="Submit" value="Register"></td>
+            </tr>
+        </table>
+    </form>
     
     
     <form method="POST" action="/dashboard">
         <table>
             <tr>
-                <td>Enter username:</td>
+                <td>Enter userID:</td>
                 <td><input type = "text" name="id"></td>
             </tr>
             <tr>

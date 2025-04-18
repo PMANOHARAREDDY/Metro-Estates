@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <script src="{{ url_for('static', filename='javaScript.js') }}"></script>
+
+</head>
+<body>
+    <h1>Welcome to Metro-Estates</h1>
+    <form method="POST" action="/Register2">
+        <table>
+            <tr>
+                <td>Enter username:</td>
+                <td><input type = "text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Enter Password:</td>
+                <td><input type = "password" name="pass"></td>
+            </tr>
+            <tr>
+                <td>Enter Phone Number:</td>
+                <td><input type = "bigint" name="phone"></td>
+            </tr>
+            <tr>
+                <td> Access Type </td>
+                <td>
+                    <select name="access"> 
+                        <option value="user_access"> Buyer </option>    
+                        <option value="seller_access"> Seller </option> 
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="Submit"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
