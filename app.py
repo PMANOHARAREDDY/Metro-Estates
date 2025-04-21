@@ -88,6 +88,35 @@ def buyLeaseProp():
 @app.route('/createAcc',methods=['POST','GET'])
 def createAcc():
     return render_template("createAccount.html")
+
+@app.route('/sellDetails',methods=['POST','GET'])
+def sellDetails():
+    sid1 = request.form["sellerId"]
+    city1 = request.form["city"]
+    landMark1 = request.form["landmark"]
+    loc1 = request.form["location"]
+    rate1 = request.form["price"]
+    if not sid1 or not city1 or not landMark1 or not loc1 or not rate1:
+        return render_template("Sell_Property.html")
+    # c.execute("insert into properties_on_sale values('{}','{}','{}','{}',Null)".format(city1,landMark1,loc1,rate1))
+    c.execute("INSERT INTO properties_on_sale (city, landmark, location, quote_price) VALUES (%s, %s, %s, %s)", (city1, landMark1, loc1, rate1))
+
+    conn.commit()
+    return render_template("sellConfirmation.html")
+
+@app.route('/buyDetails',methods=['GET','POST'])
+def buyDetails():
+    bid1 = request.form.get("buyId")
+    b_city1 = request.form.get("buyCity")
+    b_loc1 = request.form.get("buyLoc")
+    if not bid1 or not b_city1:
+        return render_template("Buy_Property.html")
+    elif not b_loc1:
+        c.execute("select * from properties_on_sale where city='{}' and b_id is NULL".format(b_city1))
+    else:
+        c.execute("select * from properties_on_sale where city='{}' and location='{}' and b_id is NULL".format(b_city1,b_loc1))
+    ans = c.fetchall()
+    return render_template("Buy_Property.html",data=ans,message="No sellers found for this location currently or maybe try just the city")
 if __name__ == "__main__":
     app.run(debug = True)
 

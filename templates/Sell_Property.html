@@ -6,6 +6,35 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Selling prop</h1>
+    <h1>Selling property with ease</h1>
+    <h3>Please fill in correct details</h3>
+    <h5>(*) Indicates mandatory details</h5>
+    <form method="POST" action="/sellDetails">
+        <table>
+            <tr>
+                <td>Enter SellerId *:</td>
+                <td><input type="number" name="sellerId"></td>
+            </tr>
+            <tr>
+                <td>Select the city *:</td>
+                <td><input type="text" name="city" maxlength="20"></td>
+            </tr>
+            <tr>
+                <td>Type in the nearest & famous landmark (15 words max) *:</td>
+                <td><input type="text" name="landmark" maxlength="15"></td>
+            </tr>
+            <tr>
+                <td>Locality name *:</td>
+                <td><input type="text" name="location" maxlength="40"></td>
+            </tr>
+            <tr>
+                <td>Quote price (INR) *:</td>
+                <td><input type="number" name="price"></td>
+            </tr>
+            <tr>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
