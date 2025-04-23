@@ -11,10 +11,14 @@ def id_generator():
     c.execute("select id from seller_access")
     row2 = c.fetchall()
     temp = []
+    temp1 = []
+    temp2 = []
     for i in row1:
         temp.append(i[0])
+        temp1.append(i[0])
     for i in row2:
         temp.append(i[0])
+        temp2.append(i[0])
     while True:
         new_id = random.randint(1000, 9999)
         if new_id not in temp:
@@ -100,9 +104,9 @@ def sellDetails():
         return render_template("Sell_Property.html")
     # c.execute("insert into properties_on_sale values('{}','{}','{}','{}',Null)".format(city1,landMark1,loc1,rate1))
     c.execute("INSERT INTO properties_on_sale (city, landmark, location, quote_price) VALUES (%s, %s, %s, %s)", (city1, landMark1, loc1, rate1))
-
+    pay_rate = (3/100)*float(rate1)
     conn.commit()
-    return render_template("sellConfirmation.html")
+    return render_template("sellConfirmation.html",p_r=pay_rate)
 
 @app.route('/buyDetails',methods=['GET','POST'])
 def buyDetails():
