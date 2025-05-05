@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="script1.js" defer></script>
+    <h1>Leasing property with ease</h1>
+    <h3>Please fill in correct details</h3>
+    <h5>(*) Indicates mandatory details</h5>
+    <form method="POST" action="/sellLeaseDetails">
+        <table>
+            <tr>
+                <td>Enter SellerId *:</td>
+                <td><input type="number" name="sellerId1"></td>
+            </tr>
+            <tr>
+                <td>Select the city *:</td>
+                <td><input type="text" name="city1" maxlength="20"></td>
+            </tr>
+            <tr>
+                <td>Type in the nearest & famous landmark (15 words max) *:</td>
+                <td><input type="text" name="landmark1" maxlength="15"></td>
+            </tr>
+            <tr> 
+                <td>Locality name *:</td>
+                <td><input type="text" name="location1" maxlength="40"></td>
+            </tr>
+            <tr>
+                <td>Quote price (INR) *:</td>
+                <td><input type="number" name="price1"></td>
+            </tr>
+            <tr>
+                <td>Months :</td>
+                <td><input type="number" name="months1" value="12"></td>
+            </tr>
+            <tr>
+                <td><input type="submit"></td>
+            </tr>
+        </table>    
+    </form>
+</body>
+</html>
