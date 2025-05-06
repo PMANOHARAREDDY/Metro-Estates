@@ -6,6 +6,54 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Buying page</h1>
+    <h1>Buying property with ease</h1>
+    <h3>Please specify your requirements</h3>
+    <h5>(*) Indicates mandatory details</h5>
+    <form method="POST" action="/buyDetails" id="myForm">
+        <table>
+            <tr>
+                <td>Enter BuyerID:</td>
+                <td><input type="number" name="buyId"></td>
+            </tr>
+            <tr>
+                <td>Enter city:</td>
+                <td><input type="text" name="buyCity"></td>
+            </tr>
+            <tr>
+                <td>Enter location:</td>
+                <td><input type="text" name="buyLoc"></td>
+            </tr>
+            <tr>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="GET">
+        {%if data%}
+            <table border="1" style="margin: 1px;">
+                <tr>
+                    <th>CITY</th>
+                    <th>LANDMARK</th>
+                    <th>LOCATION</th>
+                    <th>QUOTE PRICE</th>
+                    <th>BUYER</th>
+                </tr>
+                {%for i in data%}
+                    <tr>
+                        <td>{{i[1]}}</td>
+                        <td>{{i[2]}}</td>
+                        <td>{{i[3]}}</td>
+                        <td>{{i[4]}}</td>
+                        <td>{{i[5]}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {%else%}
+            <p>{{message}}</p>
+        {%endif%}
+    </form>
+
+
 </body>
 </html>

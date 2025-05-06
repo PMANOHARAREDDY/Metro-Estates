@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Property</title>
+</head>
+<body>
+    <h1>Withdraw Property</h1>
+    <h3>Select the property to withdraw:</h3>
+    <form method="POST" action="/withdrawProperty">
+        <label for="prop_id">Enter Property ID:</label>
+        <input type="number" name="prop_id" required>
+        <br><br>
+        <input type="submit" value="Withdraw">
+    </form>
+    {% if months %}
+        <h4>This property was listed for {{ months }} months.</h4>
+    {% endif %}
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
